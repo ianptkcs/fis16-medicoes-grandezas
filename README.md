@@ -8,7 +8,7 @@ This project is designed to process experimental measurement data, perform stati
 │   └── files.py
 ├── data/
 │   ├── medicoes.txt
-│   └── massas.txt (not shown, but implied)
+│   └── massas.txt
 ├── tools/
 │   └── tools.py
 ├── output/

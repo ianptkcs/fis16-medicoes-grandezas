@@ -74,20 +74,19 @@ def str_media(media, casas_decimais=2):
 # Função para formatar a média com incerteza, considerando potência de 10
 def str_media_incerteza(media, incerteza):
     n = int(np.floor(np.log10(abs(incerteza))))
-    incerteza_arredondada = round(incerteza / (10 ** n)) * (10 ** n)
     
     # Arredonda a media
     media_arredondada = round(media / (10 ** n)) * (10 ** n)
     
     # Calcula a ordem de grandeza da média
-    ordem_grandeza = int(np.floor(np.log10(abs(incerteza_arredondada))))
+    ordem_grandeza = int(np.floor(np.log10(abs(incerteza))))
     media_normalizada = media / (10 ** ordem_grandeza)
-    incerteza_normalizada = incerteza_arredondada / (10 ** ordem_grandeza)
+    incerteza_normalizada = incerteza / (10 ** ordem_grandeza)
     # Formata o resultado considerando a potência de 10 se necessário
-    if ordem_grandeza > 0 or ordem_grandeza < -2:
-        resultado = f"({media_normalizada:.1f} ± {incerteza_normalizada:.1f}) · 10$^{{{ordem_grandeza}}}$".replace('.', ',')
+    if ordem_grandeza > 0 or ordem_grandeza < -1:
+        resultado = f"({media_normalizada:.1f} ± {incerteza_normalizada:.1f})·10$^{{{ordem_grandeza}}}$".replace('.', ',')
     else:
-        resultado = f"{media_arredondada:.{max(1, -n)}f} ± {incerteza_arredondada:.{max(1, -n)}f}".replace('.', ',')
+        resultado = f"{media_arredondada:.{max(0, -n)}f} ± {incerteza:.{max(0, -n)}f}".replace('.', ',')
     
     return resultado
 
@@ -98,7 +97,7 @@ def criar_tabela_latex(arquivo, alinhamento, n):
     arquivo.write('\\usepackage{amsmath}\n')
     arquivo.write('\\usepackage{booktabs}\n')
     arquivo.write('\\usepackage[portuguese]{babel}\n')
-    arquivo.write('\\usepackage[a4paper, margin=1.5cm]{geometry}\n')
+    arquivo.write('\\usepackage[a4paper, margin=0.1cm, top=0.5cm, bottom=0.5cm]{geometry}\n')
     arquivo.write('\\begin{document}\n\n')
     arquivo.write('\\begin{table}[h!]\n')
     arquivo.write('\\centering\n')

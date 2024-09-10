@@ -157,7 +157,7 @@ for objeto in dados_experimento.massas:
                 if objeto == 'Bola':
                     desvio_padrao_volume = (4/3) * math.pi * desvio_padrao_volume
                     volume = (1/6) * math.pi * volume
-                erro = t.erro(dados_experimento, objeto, aluno_index)
+                erro = t.erro(dados_experimento, objeto, aluno_index) / 10
                 incerteza = t.sqrt_sum_sqr(desvio_padrao_media, erro)
                 volumes.append(volume)
                 incertezas_volumes.append(incerteza)
@@ -176,9 +176,9 @@ for objeto in dados_experimento.massas:
                 desvio_padrao_media_x = t.desvpadmed(dados_x) 
                 desvio_padrao_media_y = t.desvpadmed(dados_y) 
                 desvio_padrao_media_z = t.desvpadmed(dados_z) 
-                erro_x = dados_experimento.medicoes[objeto+'_x'][aluno_index]['erro'] 
-                erro_y = dados_experimento.medicoes[objeto+'_y'][aluno_index]['erro'] 
-                erro_z = dados_experimento.medicoes[objeto+'_z'][aluno_index]['erro']
+                erro_x = dados_experimento.medicoes[objeto+'_x'][aluno_index]['erro'] / 10
+                erro_y = dados_experimento.medicoes[objeto+'_y'][aluno_index]['erro'] / 10
+                erro_z = dados_experimento.medicoes[objeto+'_z'][aluno_index]['erro'] / 10
                 incerteza_x = t.sqrt_sum_sqr(desvio_padrao_media_x, erro_x)
                 incerteza_y = t.sqrt_sum_sqr(desvio_padrao_media_y, erro_y)
                 incerteza_z = t.sqrt_sum_sqr(desvio_padrao_media_z, erro_z) 

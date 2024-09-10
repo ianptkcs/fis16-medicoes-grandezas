@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  9 SEP 2024 21:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  10 SEP 2024 14:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -171,15 +171,15 @@ LaTeX Font Info:    ... okay on input line 6.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(42.67912pt, 512.14963pt, 42.67912pt)
-* v-part:(T,H,B)=(42.67912pt, 759.6886pt, 42.67912pt)
+* h-part:(L,W,R)=(2.84544pt, 591.81699pt, 2.84544pt)
+* v-part:(T,H,B)=(14.22636pt, 816.59412pt, 14.22636pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=512.14963pt
-* \textheight=759.6886pt
-* \oddsidemargin=-29.59087pt
-* \evensidemargin=-29.59087pt
-* \topmargin=-66.59087pt
+* \textwidth=591.81699pt
+* \textheight=816.59412pt
+* \oddsidemargin=-69.42455pt
+* \evensidemargin=-69.42455pt
+* \topmargin=-95.04362pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -204,17 +204,17 @@ LaTeX Font Info:    ... okay on input line 6.
 Here is how much of TeX's memory you used:
  2734 strings out of 478287
  44352 string characters out of 5849290
- 365935 words of memory out of 5000000
+ 365990 words of memory out of 5000000
  20961 multiletter control sequences out of 15000+600000
  470771 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,13n,62p,368b,282s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,13n,62p,363b,282s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/
 cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
 pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on output/mock/medicoes/Barra_z.pdf (1 page, 34536 bytes).
+Output written on output/mock/medicoes/Barra_z.pdf (1 page, 34528 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  17 compressed objects within 1 object stream

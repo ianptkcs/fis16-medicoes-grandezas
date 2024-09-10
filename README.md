@@ -35,7 +35,7 @@ This project is designed to process experimental measurement data, perform stati
     ```
     pip install numpy
     ```
-3. Make sure you have a LaTeX distribution installed on your system.
+3. Make sure you have a LaTeX distribution installed on your system (or don't run compile_latex and do it trough OverLeaf, for example)
 
 ## Usage
 
@@ -114,12 +114,13 @@ Compiles the generated LaTeX files into PDF format:
 The project generates:
 
 1. LaTeX files in `output/latex/`
-2. Temporary compilation files in `output/mock/`
+2. Undesired compilation files in `output/mock/`
 3. Final PDF reports in `output/pdf/`
 
 ## Notes
 
 -   The project is set up to handle measurements for various objects (Cubo, Barbante, Bola, Barrinha, Barra, Cilindro).
+-   The "Bola" object is substituted with "Esfera" (Ball -> Sphere)
 -   It calculates and reports measurements, masses, volumes, and densities where applicable.
 -   The LaTeX output includes tables with measurements, uncertainties, and derived quantities.
 

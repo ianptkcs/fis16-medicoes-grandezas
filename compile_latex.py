@@ -1,11 +1,10 @@
 import os
 import subprocess
 import shutil
-
 def compile_latex_files(source_directory, temp_directory, output_directory):
     # Certificar-se de que os diretórios de saída existem
-    os.makedirs(temp_directory, exist_ok=True)
     os.makedirs(output_directory, exist_ok=True)
+    os.makedirs(temp_directory, exist_ok=True)
 
     # Listar todos os arquivos no diretório de origem
     for filename in os.listdir(source_directory):

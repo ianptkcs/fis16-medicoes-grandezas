@@ -3,9 +3,6 @@ import locale
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-def contar_casas_decimais(*numeros):
-    return min(len(str(float(numero)).split('.')[-1]) for numero in numeros)
-
 def extrair_dados_medicao(dados_experimento, arquivo_medicoes):
     for linha in arquivo_medicoes:
         objeto = linha[0]
@@ -22,6 +19,9 @@ def extrair_dados_medicao(dados_experimento, arquivo_medicoes):
             dados=dados
         )
         
+def contar_casas_decimais(*numeros):
+    return min(len(str(float(numero)).split('.')[-1]) for numero in numeros)
+
 def extrair_dados_massa(dados_experimento, arquivo_massas):
     for linha in arquivo_massas:
         objeto = linha[0]
@@ -67,13 +67,31 @@ def erro(dados_experimento, objeto, aluno_index, tipo='medicoes',):
 def dados(dados_experimento, objeto, aluno_index, tipo='medicoes'):
     return getattr(dados_experimento, tipo)[objeto][aluno_index]['dados']
 
+# Função para formatar a média com casas decimais
 def str_media(media, casas_decimais=2):
-    return locale.format_string(f'%.{casas_decimais}f', media, grouping=True)
+    return locale.format_string(f"%.{casas_decimais}f", media, grouping=True)
 
-def str_media_incerteza(media, incerteza, casas_decimais=2):
-    media_formatada = locale.format_string(f'%.{casas_decimais}f', media, grouping=True)
-    incerteza_formatada = locale.format_string(f'%.{casas_decimais}f', incerteza, grouping=True)
-    return f'{media_formatada} ± {incerteza_formatada}'
+# Função para formatar a média com incerteza, considerando potência de 10
+def str_media_incerteza(media, incerteza):
+    n = int(np.floor(np.log10(abs(incerteza))))
+    incerteza_arredondada = round(incerteza / (10 ** n)) * (10 ** n)
+    
+    # Arredonda a media
+    media_arredondada = round(media / (10 ** n)) * (10 ** n)
+    
+    # Calcula a ordem de grandeza da média
+    ordem_grandeza = int(np.floor(np.log10(abs(incerteza_arredondada))))
+    media_normalizada = media / (10 ** ordem_grandeza)
+    incerteza_normalizada = incerteza_arredondada / (10 ** ordem_grandeza)
+    # Formata o resultado considerando a potência de 10 se necessário
+    if ordem_grandeza > 0 or ordem_grandeza < -2:
+        resultado = f"({media_normalizada:.1f} ± {incerteza_normalizada:.1f}) · 10$^{{{ordem_grandeza}}}$".replace('.', ',')
+    else:
+        resultado = f"{media_arredondada:.{max(1, -n)}f} ± {incerteza_arredondada:.{max(1, -n)}f}".replace('.', ',')
+    
+    return resultado
+
+
 
 def criar_tabela_latex(arquivo, alinhamento, n):
     arquivo.write('\\documentclass{article}\n')

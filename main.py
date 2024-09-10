@@ -122,7 +122,7 @@ for objeto in dados_experimento.massas:
                 incerteza_y = t.sqrt_sum_sqr(desvio_padrao_media_y, erro_y)
                 incerteza_z = t.sqrt_sum_sqr(desvio_padrao_media_z, erro_z)
                 casas_decimais = t.contar_casas_decimais(erro_x, erro_y, erro_z, incerteza_x, incerteza_y, incerteza_z)
-                linha_comprimento += t.shortsack('x: ' + t.str_media_incerteza(media_x, incerteza_x, casas_decimais), 'y: ' + t.str_media_incerteza(media_y, incerteza_y, casas_decimais), 'z: ' + t.str_media_incerteza(media_z, incerteza_z, casas_decimais))
+                linha_comprimento += t.shortsack('x: ' + t.str_media_incerteza(media_x, incerteza_x), 'y: ' + t.str_media_incerteza(media_y, incerteza_y), 'z: ' + t.str_media_incerteza(media_z, incerteza_z))
                 linha_comprimento = t.handle_espaço(linha_comprimento, aluno_index)
         arquivo.write(linha_comprimento + '\\\\[4pt]\n')
         

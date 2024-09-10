@@ -1,0 +1,3 @@
+test/
+output/mock/*
+*/__pycache__

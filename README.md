@@ -133,7 +133,6 @@ The project generates:
 
 ## Authors & Contributors
 
--   Muxiba
 -   Ian Patrick
 
 ## License

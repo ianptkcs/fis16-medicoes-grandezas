@@ -1,3 +1,4 @@
 test/
 output/mock/*
-*/__pycache__
+*/__pycache__]
+.py

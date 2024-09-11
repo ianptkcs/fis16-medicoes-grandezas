@@ -1,5 +1,6 @@
 import numpy as np
 import locale
+from decimal import Decimal
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
@@ -73,21 +74,33 @@ def str_media(media, casas_decimais=2):
 
 # Função para formatar a média com incerteza, considerando potência de 10
 def str_media_incerteza(media, incerteza, casas_decimais=1):
-    n = int(np.floor(np.log10(abs(incerteza))))
-    
-    # Calcula a ordem de grandeza da média
-    ordem_grandeza = int(np.floor(np.log10(abs(incerteza))))
-    media_normalizada = media / (10 ** ordem_grandeza)
-    incerteza_normalizada = incerteza / (10 ** ordem_grandeza)
-    # Formata o resultado considerando a potência de 10 se necessário
-    if ordem_grandeza > 0 or ordem_grandeza < -1:
-        resultado = f"({media_normalizada:.{casas_decimais}f} ± {incerteza_normalizada:.{casas_decimais}f})·10$^{{{ordem_grandeza}}}$".replace('.', ',')
+    value = Decimal(media)
+    uncertainty = Decimal(incerteza)
+
+    # Convert to scientific notation
+    scientific_value = f"{value:.{casas_decimais+1}e}"
+    scientific_uncertainty = f"{uncertainty:.{casas_decimais+1}e}"
+
+    # Split into mantissa and exponent
+    _, exponent_value = scientific_value.split('e')
+    mantissa_uncertainty, exponent_uncertainty = scientific_uncertainty.split('e')
+
+    # Convert strings to numbers for calculations
+    mantissa_uncertainty_num = float(mantissa_uncertainty)
+    exponent_value_num = int(exponent_value)
+    exponent_uncertainty_num = int(exponent_uncertainty)
+
+    # Adjust mantissas and exponents
+    adjusted_mantissa_value = value * (10 ** (exponent_value_num - exponent_uncertainty_num)) / (10 **(exponent_value_num))
+    adjusted_mantissa_uncertainty = mantissa_uncertainty_num
+
+    # Format the result
+    if exponent_uncertainty_num == 0 or exponent_uncertainty_num == -1:
+        return f"{media:.{casas_decimais}f} ± {incerteza:.{casas_decimais}f}".replace('.', ',')
+    elif exponent_uncertainty_num == 1:
+        return f"({adjusted_mantissa_value:.{casas_decimais}f} ± {adjusted_mantissa_uncertainty:.{casas_decimais}f})·10".replace('.', ',')
     else:
-        resultado = f"{media_normalizada:.{max(casas_decimais, -n)}f} ± {incerteza_normalizada:.{max(casas_decimais, -n)}f}".replace('.', ',')
-    
-    return resultado
-
-
+        return f"({adjusted_mantissa_value:.{casas_decimais}f} ± {adjusted_mantissa_uncertainty:.{casas_decimais}f})·10$^{{{exponent_uncertainty_num}}}$".replace('.', ',')
 
 def criar_tabela_latex(arquivo, alinhamento, n):
     arquivo.write('\\documentclass{article}\n')

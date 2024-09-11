@@ -72,11 +72,8 @@ def str_media(media, casas_decimais=2):
     return locale.format_string(f"%.{casas_decimais}f", media, grouping=True)
 
 # Função para formatar a média com incerteza, considerando potência de 10
-def str_media_incerteza(media, incerteza):
+def str_media_incerteza(media, incerteza, casas_decimais=1):
     n = int(np.floor(np.log10(abs(incerteza))))
-    
-    # Arredonda a media
-    media_arredondada = round(media / (10 ** n)) * (10 ** n)
     
     # Calcula a ordem de grandeza da média
     ordem_grandeza = int(np.floor(np.log10(abs(incerteza))))
@@ -84,9 +81,9 @@ def str_media_incerteza(media, incerteza):
     incerteza_normalizada = incerteza / (10 ** ordem_grandeza)
     # Formata o resultado considerando a potência de 10 se necessário
     if ordem_grandeza > 0 or ordem_grandeza < -1:
-        resultado = f"({media_normalizada:.1f} ± {incerteza_normalizada:.1f})·10$^{{{ordem_grandeza}}}$".replace('.', ',')
+        resultado = f"({media_normalizada:.{casas_decimais}f} ± {incerteza_normalizada:.{casas_decimais}f})·10$^{{{ordem_grandeza}}}$".replace('.', ',')
     else:
-        resultado = f"{media_arredondada:.{max(0, -n)}f} ± {incerteza:.{max(0, -n)}f}".replace('.', ',')
+        resultado = f"{media_normalizada:.{max(casas_decimais, -n)}f} ± {incerteza_normalizada:.{max(casas_decimais, -n)}f}".replace('.', ',')
     
     return resultado
 

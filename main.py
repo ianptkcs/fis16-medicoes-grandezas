@@ -74,13 +74,26 @@ for objeto in dados_experimento.medicoes:
         # Incerteza
         linha = 'Incerteza & '
         for aluno_index in range(5):
+            media = t.med(t.dados(dados_experimento, objeto, aluno_index))
             desvio_padrao_media = t.desvpadmed(t.dados(dados_experimento, objeto, aluno_index))
             erro = t.erro(dados_experimento, objeto, aluno_index)
             incerteza = t.sqrt_sum_sqr(desvio_padrao_media, erro)
             casas_decimais = t.contar_casas_decimais(erro, incerteza)
             linha += t.str_media(incerteza, casas_decimais)
             linha = t.handle_espaço(linha, aluno_index)
-        arquivo.write(linha + '\\\\\n')        
+        arquivo.write(linha + '\\\\[3pt]\n')        
+        
+        # Valor final
+        linha = 'Valor final & '
+        for aluno_index in range(5):
+            desvio_padrao_media = t.desvpadmed(t.dados(dados_experimento, objeto, aluno_index))
+            erro = t.erro(dados_experimento, objeto, aluno_index)
+            incerteza = t.sqrt_sum_sqr(desvio_padrao_media, erro)
+            casas_decimais = t.contar_casas_decimais(erro, incerteza)
+            linha += t.str_media_incerteza(media, incerteza, casas_decimais)
+            linha = t.handle_espaço(linha, aluno_index)
+        arquivo.write(linha + '\\\\[3pt]\n')
+            
         t.terminar_tabela_latex(arquivo)
         
 for objeto in dados_experimento.massas:
